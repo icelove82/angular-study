@@ -4,10 +4,17 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+
+// PrimeNG
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
+
+// App component
 import { ListComponent } from './list/list.component';
 
 @NgModule({
@@ -16,12 +23,15 @@ import { ListComponent } from './list/list.component';
     ListComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     InputTextModule,
     ButtonModule,
     TableModule,
-    DialogModule
+    DialogModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]
