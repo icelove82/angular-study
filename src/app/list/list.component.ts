@@ -42,6 +42,5 @@ export class ListComponent implements OnInit {
       console.log(data);
       this.cars = data;
     });
-    console.log("asdfsd");
   }
 }
