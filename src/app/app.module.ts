@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 
+import { HttpClientModule } from '@angular/common/http';
+
 // PrimeNG
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -23,6 +25,7 @@ import { ListComponent } from './list/list.component';
     ListComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
     BrowserModule,

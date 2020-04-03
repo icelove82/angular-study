@@ -1,0 +1,5 @@
+[
+  { "vin": "SUV", "year": "2020", "brand": "Hyundai", "color": "black" },
+  { "vin": "VAN", "year": "2019", "brand": "KIA", "color": "white" },
+  { "vin": "HB", "year": "2018", "brand": "TOYOTA", "color": "blue" }
+]
