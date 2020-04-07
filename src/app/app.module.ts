@@ -18,11 +18,13 @@ import { DropdownModule } from 'primeng/dropdown';
 
 // App component
 import { ListComponent } from './list/list.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
+    SearchComponent,
   ],
   imports: [
     HttpClientModule,

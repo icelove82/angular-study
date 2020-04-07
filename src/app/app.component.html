@@ -318,7 +318,19 @@
   </div>
 
   <div id="my-app-content" style="height: 700px; width: 1200px;">
-    <app-list></app-list>
+
+    <div class="ui-g" style="padding: 10px;">
+
+      <!-- 搜索条件部分 -->
+      <div class="ui-g-3">
+        <app-search></app-search>
+      </div>
+
+      <!-- 数据显示部分 -->
+      <div class="ui-g-9">
+        <app-list></app-list>
+      </div>
+    </div>
   </div>
 
 </div>
