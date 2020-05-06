@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectItem } from 'primeng/api';
 
+import { BoeService } from '../boe.service';
+
 interface Sex {
   name: string;
   code: string;
@@ -22,7 +24,7 @@ export class SearchComponent implements OnInit {
   namePlaceholder = '请输入名字';
   genderList: Sex[];
 
-  constructor() {
+  constructor(private boeService: BoeService) {
     this.genderList = [
       { name: '男', code: 'M' },
       { name: '女', code: 'F' }
@@ -35,5 +37,13 @@ export class SearchComponent implements OnInit {
 
   onBlur() {
     alert('The value :' + this.name + ' / Gender : ' + this.gender.name);
+  }
+
+  onClickSearch() {
+    this.boeService.getAllStudents().subscribe(
+      data => {
+
+      }
+    );
   }
 }
