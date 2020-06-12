@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { InputTextModule } from 'primeng/inputtext';
-import { SelectItem } from 'primeng/api';
-
 import { BoeService } from '../boe.service';
 
 interface Sex {
@@ -17,7 +14,7 @@ interface Sex {
 })
 export class SearchComponent implements OnInit {
   // 组件主数据
-  name;
+  name: string;
   gender: Sex;
 
   // 组件非主数据
@@ -36,13 +33,17 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {}
 
   onBlur() {
-    alert('The value :' + this.name + ' / Gender : ' + this.gender.name);
+    // alert('The value :' + this.name + ' / Gender : ' + this.gender.name);
   }
 
   onClickSearch() {
     this.boeService.getAllStudents().subscribe(
       data => {
 
+        console.log(data);
+      },
+      error => {
+        console.log('ERROR: ' + JSON.stringify(error));
       }
     );
   }
