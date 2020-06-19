@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { student } from './model/student';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,17 +9,18 @@ import { HttpClient } from '@angular/common/http';
 export class BoeService {
 
   // Domain
-  BoeServiceDomain = "http://localhost:8080";
+  BoeServiceDomain: string = "http://localhost:8080";
 
   // All data service url
-  AllData = "/boe/all";
+  AllData: string = "/boe/all";
 
   // Data
-  student = [];
+  studentData: student[] = [];
 
   constructor(private http: HttpClient) { }
 
-  getAllStudents() {
-    return this.http.get(this.BoeServiceDomain + this.AllData);
+  // 获取全部学生信息
+  getAllStudents(): Observable<object> {
+    return this.http.get<student[]>(this.BoeServiceDomain + this.AllData);
  }
 }

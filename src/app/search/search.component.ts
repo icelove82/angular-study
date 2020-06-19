@@ -37,14 +37,7 @@ export class SearchComponent implements OnInit {
   }
 
   onClickSearch() {
-    this.boeService.getAllStudents().subscribe(
-      data => {
 
-        console.log(data);
-      },
-      error => {
-        console.log('ERROR: ' + JSON.stringify(error));
-      }
-    );
+    console.log('Yes, u click search.');
   }
 }
