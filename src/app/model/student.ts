@@ -5,5 +5,5 @@ export class student {
   name: string;
   gender: string;
   age: number;
-  isAdult: boolean;
+  adult: boolean;
 }

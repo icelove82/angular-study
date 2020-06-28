@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 import { BoeService } from '../boe.service';
+import { searchParam } from './../model/searchParam';
 
-interface Sex {
-  name: string;
-  code: string;
-}
+// interface Sex {
+//   name: string;
+//   code: string;
+// }
 
 @Component({
   selector: 'app-search',
@@ -13,31 +14,34 @@ interface Sex {
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
+
+  // 性别选项
+  genderList = [
+    { name: '全部', code: '' },
+    { name: '男', code: 'M' },
+    { name: '女', code: 'F' }
+  ];
+
   // 组件主数据
-  name: string;
-  gender: Sex;
+  name = '';
+  gender = this.genderList[0];
 
   // 组件非主数据
   namePlaceholder = '请输入名字';
-  genderList: Sex[];
 
   constructor(private boeService: BoeService) {
-    this.genderList = [
-      { name: '男', code: 'M' },
-      { name: '女', code: 'F' }
-    ];
-
-    this.gender = this.genderList[0];
   }
 
-  ngOnInit(): void {}
-
-  onBlur() {
-    // alert('The value :' + this.name + ' / Gender : ' + this.gender.name);
+  ngOnInit(): void {
   }
 
   onClickSearch() {
 
-    console.log('Yes, u click search.');
+    // Search key word
+    let param = new searchParam();
+    param.name = this.name;
+    param.gender = this.gender.code;
+
+    this.boeService.doSearch(param);
   }
 }
