@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { BoeService } from '../boe.service';
 import { SearchParam } from './../model/searchParam';
+import { AdultRadio } from './../model/adultRadio';
 
 @Component({
   selector: 'app-search',
@@ -19,6 +20,7 @@ export class SearchComponent implements OnInit {
   // 组件主数据
   name = '';
   gender = this.genderList[0];
+  selectedAdultValue = 1;
 
   // 组件非主数据
   namePlaceholder = '请输入名字';
@@ -34,5 +36,10 @@ export class SearchComponent implements OnInit {
     param.gender = this.gender.code;
 
     this.boeService.doSearch(param);
+  }
+
+  onAdultSelected(param: AdultRadio) {
+
+    alert(param.code + ' / ' + param.name);
   }
 }

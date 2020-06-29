@@ -3,11 +3,12 @@
   <div id="search_condition_1">
     <label class="label" for="searchName">名字: </label>
     <input
+      pInputText
       id="searchName"
       type="text"
-      pInputText
       [(ngModel)]="name"
       [placeholder]="namePlaceholder"
+      (keyup.enter)="onClickSearch()"
     />
   </div>
 
@@ -16,11 +17,17 @@
     <label class="label" for="searchGender">性别: </label>
     <p-dropdown
       id="searchGender"
+      optionLabel="name"
       [options]="genderList"
       [(ngModel)]="gender"
-      optionLabel="name"
     ></p-dropdown>
   </div>
+
+  <!-- 搜索条件 : 成年与否 -->
+  <app-adult
+  [selectedValue] = "selectedAdultValue"
+  (adultSelected) = "onAdultSelected($event)"
+  ></app-adult>
 
   <div id="search_btn_wrapper">
     <p-button

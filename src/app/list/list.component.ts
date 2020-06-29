@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { of } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
 import { BoeService } from './../boe.service';
 import { SearchParam } from './../model/searchParam';
 import { Student } from './../model/student';
@@ -23,15 +25,21 @@ export class ListComponent implements OnInit {
   }
 
   getStudentsByNameGender(param: SearchParam) {
-    this.boeService.getStudentsByNameGender(param).subscribe(
-      (data) => {
-        this.students = data;
-        console.log(data);
-      },
-      (error) => {
-        console.log('ERROR: ' + JSON.stringify(error));
-      }
-    );
+    this.boeService
+      .getStudentsByNameGender(param)
+      .pipe(
+        // Filter
+        map((data) => data.filter((item) => item.age > 18))
+      )
+      .subscribe(
+        (data) => {
+          this.students = data.filter((item) => item.age > 18);
+          console.log(data);
+        },
+        (error) => {
+          console.log('ERROR: ' + JSON.stringify(error));
+        }
+      );
   }
 
   getAllStudents(param: SearchParam) {
