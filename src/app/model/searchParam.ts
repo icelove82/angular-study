@@ -1,4 +1,4 @@
-export class searchParam {
+export class SearchParam {
   name: string;
   gender: string;
 }
