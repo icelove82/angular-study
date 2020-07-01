@@ -39,7 +39,7 @@ export class SearchComponent implements OnInit {
   }
 
   onAdultSelected(param: AdultRadio) {
-
-    alert(param.code + ' / ' + param.name);
+    // 通过 Service 触发过滤事件
+    this.boeService.doFilter(param);
   }
 }
