@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { of } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 import { BoeService } from './../boe.service';
 import { SearchParam } from './../model/searchParam';
 import { Student } from './../model/student';
 import { AdultRadio } from './../model/adultRadio';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-list',
@@ -17,8 +17,27 @@ export class ListComponent implements OnInit {
   students: Student[];
   studentsBackup: Student[];
 
+  // 搜索条件
+  searchKey: SearchParam;
+
   // 过滤条件
   filterCondition: AdultRadio;
+
+  // 右键菜单
+  items: MenuItem[];
+  selectedStudent: Student;
+
+  // 弹窗
+  genderList = [
+    { name: '男', code: 'M' },
+    { name: '女', code: 'F' },
+  ];
+
+  displayDialog = false;
+  title = '新建';
+  mode = 1;
+  targetStudent: Student = new Student();
+  targetGender = this.genderList[0];
 
   constructor(private boeService: BoeService) {}
 
@@ -35,6 +54,31 @@ export class ListComponent implements OnInit {
       this.filterCondition = param;
       this.filterStudents();
     });
+
+    // 初始化右键菜单
+    this.items = [
+      {
+        label: '新建',
+        icon: 'pi pi-search-plus',
+        command: (event) => {
+          this.openPopupWindow(1, null);
+        },
+      },
+      {
+        label: '修改',
+        icon: 'pi pi-pencil',
+        command: (event) => {
+          this.openPopupWindow(2, this.selectedStudent);
+        },
+      },
+      {
+        label: '删除',
+        icon: 'pi pi-trash',
+        command: (event) => {
+          this.deleteStudent(this.selectedStudent);
+        },
+      },
+    ];
   }
 
   filterStudents() {
@@ -47,7 +91,45 @@ export class ListComponent implements OnInit {
     }
   }
 
+  openPopupWindow(mode: number, target: Student) {
+    this.mode = mode;
+    if (mode === 1) {
+      this.title = '新建';
+      this.targetStudent = new Student();
+    } else {
+      this.title = '修改';
+      this.targetStudent = Object.assign({}, target);
+      this.targetGender =
+        this.targetStudent.gender === 'M'
+          ? this.genderList[0]
+          : this.genderList[1];
+    }
+
+    this.displayDialog = true;
+  }
+
+  onClickSave() {
+    this.targetStudent.gender = this.targetGender.code;
+    this.boeService.saveStudents([this.targetStudent]).subscribe(
+      (data) => {
+        alert(`成功保存${data}条数据！`);
+        this.displayDialog = false;
+        this.getStudentsByNameGender(this.searchKey);
+      },
+      (error) => {
+        alert(`保存失败${error}`);
+      }
+    );
+  }
+
+  onClickDelete() {
+    alert('DEl');
+  }
+
+  deleteStudent(target: Student) {}
+
   getStudentsByNameGender(param: SearchParam) {
+    this.searchKey = param;
     this.boeService
       .getStudentsByNameGender(param)
       // .pipe(
