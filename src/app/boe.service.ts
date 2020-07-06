@@ -15,6 +15,7 @@ export class BoeService {
 
   // By Name & Gender data service url
   SearchData = '/boe/students';
+  DeleteData = '/boe/student';
 
   // All data service url
   AllData = '/boe/all';
@@ -64,5 +65,15 @@ export class BoeService {
       this.BoeServiceDomain + this.SearchData,
       param
     );
+  }
+
+  // 删除学生信息
+  deleteStudent(param: Student): Observable<any> {
+    let params = new HttpParams();
+    params = params.set('ID', param.id.toString());
+
+    return this.http.delete(this.BoeServiceDomain + this.DeleteData, {
+      params,
+    });
   }
 }

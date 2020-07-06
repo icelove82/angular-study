@@ -123,10 +123,32 @@ export class ListComponent implements OnInit {
   }
 
   onClickDelete() {
-    alert('DEl');
+    if (this.mode === 2) {
+      this.boeService.deleteStudent(this.targetStudent).subscribe(
+        (complete) => {
+          alert(`学生 ${this.targetStudent.name} 删除成功`);
+          this.displayDialog = false;
+          this.getStudentsByNameGender(this.searchKey);
+        },
+        (error) => {
+          alert('删除失败');
+        }
+      );
+    }
   }
 
-  deleteStudent(target: Student) {}
+  deleteStudent(target: Student) {
+    this.boeService.deleteStudent(target).subscribe(
+      (complete) => {
+        alert(`学生 ${target.name} 删除成功`);
+        this.displayDialog = false;
+        this.getStudentsByNameGender(this.searchKey);
+      },
+      (error) => {
+        alert('删除失败');
+      }
+    );
+  }
 
   getStudentsByNameGender(param: SearchParam) {
     this.searchKey = param;
