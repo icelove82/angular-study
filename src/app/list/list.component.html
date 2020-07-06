@@ -12,7 +12,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-student let-rowData>
-    <tr [pContextMenuRow]="rowData">
+    <tr [pContextMenuRow]="rowData" (dblclick)="onDbclick(student)">
       <td>{{ student.name }}</td>
       <td>{{ student.gender }}</td>
       <td>{{ student.age }}</td>

@@ -137,6 +137,10 @@ export class ListComponent implements OnInit {
     }
   }
 
+  onDbclick(param: Student) {
+    this.openPopupWindow(2, param);
+  }
+
   deleteStudent(target: Student) {
     this.boeService.deleteStudent(target).subscribe(
       (complete) => {
